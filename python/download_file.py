@@ -150,6 +150,7 @@ class DownloadWorkerThread(threading.Thread):
 			headers = downloadWorker.headers
 			headers['Range'] = "bytes=" + str(content_range[0]) + "-" + str(content_range[1] - 1)
 
+			# 若一个线程一直请求不成功，则会一直循环
 			while True:
 				iTryTimes = 0
 				r = requests.get(downloadWorker.url, headers=headers)
